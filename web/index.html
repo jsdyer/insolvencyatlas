@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare Canadian insolvency filings across provinces and annual rates across regions, metro areas and industries.">
+  <link rel="canonical" href="https://coolcode.ca/insolvencyatlas/">
+  <title>Insolvency Atlas · CoolCode</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-layout">
+      <a href="https://coolcode.ca/" class="brand"><span aria-hidden="true">$_</span> CoolCode</a>
+      <a href="#sources">Data and definitions</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <h1>Insolvency Atlas</h1>
+      <p>Compare bankruptcies and proposals across Canada. Look at monthly filings or use annual rates to compare places and industries of different sizes.</p>
+      <p class="mono status" id="coverage" role="status">Loading federal statistics…</p>
+    </section>
+    <section class="panel analyzer" id="analyzer" hidden aria-labelledby="compare-title">
+      <div class="section-heading">
+        <div><h2 id="compare-title">Compare series</h2></div>
+        <div class="examples" aria-label="Example comparisons">
+          <button type="button" data-example="provinces">BC and Nova Scotia</button>
+          <button type="button" data-example="metros">Vancouver and Halifax</button>
+          <button type="button" data-example="sectors">Technology and retail</button>
+        </div>
+      </div>
+      <form id="controls">
+        <label>Dataset
+          <select id="dataset">
+            <optgroup label="Filing counts">
+              <option value="monthly">Monthly filings</option>
+              <option value="yearly">Calendar-year filings</option>
+            </optgroup>
+            <optgroup label="Annual rates">
+              <option value="consumer-regions">Consumer rates · provinces and regions</option>
+              <option value="consumer-metros">Consumer rates · metro areas</option>
+              <option value="business-regions">Business rates · provinces and regions</option>
+              <option value="business-metros">Business rates · metro areas</option>
+              <option value="business-sectors">Business rates · industry sectors</option>
+            </optgroup>
+          </select>
+        </label>
+        <label id="group-label">Filer
+          <select id="group">
+            <option value="consumer">Consumers</option><option value="business">Businesses</option>
+            <option value="corporate">Corporations</option><option value="total">All filers</option>
+          </select>
+        </label>
+        <label>Measure
+          <select id="measure">
+            <option value="insolvency">All insolvencies</option>
+            <option value="bankruptcy">Bankruptcies</option>
+            <option value="proposal">Proposals</option>
+          </select>
+        </label>
+        <label>Primary <select id="primary"></select></label>
+        <label>Compare with <select id="secondary"></select></label>
+        <label>Date range <select id="range"></select></label>
+      </form>
+      <p id="units" class="muted"></p>
+      <div class="summary" id="summary"></div>
+      <div class="chart-heading">
+        <h3 id="chart-title">Time series</h3>
+        <div id="legend" class="legend"></div>
+      </div>
+      <canvas id="chart" role="img" aria-labelledby="chart-title" aria-describedby="summary"></canvas>
+      <div class="chart-footer">
+        <p id="missing" class="muted"></p>
+        <button type="button" id="export">Download CSV</button>
+      </div>
+      <details>
+        <summary>Show observation table</summary>
+        <div class="scroll-table" tabindex="0">
+          <table>
+            <thead id="table-head"></thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+    <section class="panel sources" id="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Data and definitions</h2>
+      <div>
+        <p><strong>Filing counts.</strong> The Office of the Superintendent of Bankruptcy publishes the monthly series by province and territory. Calendar-year views sum twelve reported months. Partial years and incomplete totals are shown as missing.</p>
+        <p><strong>Annual rates.</strong> Consumer rates are per 1,000 residents aged 18 and older. Business rates are per 1,000 businesses. The rate workbook provides separate series for provinces and economic regions, census metro areas, and business sectors. Area definitions and reporting availability can change over time.</p>
+        <p><strong>Measures.</strong> Insolvencies include bankruptcies and proposals. The corporate series is a subset of business filings, which also cover individual businesses.</p>
+      </div>
+      <ul class="source-links">
+        <li><a href="https://open.canada.ca/data/en/dataset/746709f1-c729-44a1-ba84-7be5eadd3664">Official monthly dataset</a> <a id="count-file" hidden>Workbook ↗</a></li>
+        <li><a href="https://ised-isde.canada.ca/site/office-superintendent-bankruptcy/en/statistics-and-research/annual-insolvency-rates">Official rates and methodology</a> <a id="rate-file" hidden>Workbook ↗</a></li>
+        <li><a href="https://open.canada.ca/en/open-government-licence-canada">Open Government Licence – Canada</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer class="wrap">Contains information from the Office of the Superintendent of Bankruptcy, Innovation, Science and Economic Development Canada.</footer>
+</body>
+</html>
