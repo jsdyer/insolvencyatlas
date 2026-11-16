@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare Canadian insolvency filings, a grocery price and the Bank of Canada policy rate on the same timeline.">
+  <link rel="canonical" href="https://coolcode.ca/insolvencyatlas/compare.html">
+  <title>Insolvencies, prices and rates · CoolCode</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./compare.mjs"></script>
+</head>
+<body class="comparison">
+  <header class="site-header">
+    <div class="wrap header-layout">
+      <a href="https://coolcode.ca/" class="brand"><span aria-hidden="true">$_</span> CoolCode</a>
+      <a href="./">Insolvency Atlas</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <h1>Insolvencies, prices and rates</h1>
+      <p>Follow monthly insolvency filings, a grocery price and the national policy rate on one calendar. Each chart has its own scale.</p>
+      <p class="mono status" id="compare-status" role="status" aria-live="polite">Loading published data…</p>
+      <button id="compare-retry" type="button" hidden>Retry data load</button>
+    </section>
+    <section class="panel comparison-controls" id="compare-controls" hidden aria-labelledby="compare-title">
+      <div class="section-heading">
+        <h2 id="compare-title">Set the comparison</h2>
+        <div class="examples" aria-label="Date presets">
+          <button type="button" data-period="recent">Last 3 years</button>
+          <button type="button" data-period="2020">Since January 2020</button>
+          <button type="button" data-period="full">Full overlap</button>
+        </div>
+      </div>
+      <form id="comparison-form">
+        <label>Area<select id="area"></select></label>
+        <label>Grocery product<select id="product"></select></label>
+        <label>From month<input type="month" id="from" required></label>
+        <label>Through month<input type="month" id="through" required></label>
+      </form>
+      <p class="muted" id="comparison-coverage"></p>
+      <p class="validation" id="month-error" role="alert" hidden></p>
+    </section>
+    <section class="panel comparison-results" id="compare-results" hidden aria-labelledby="timeline-title">
+      <div class="section-heading">
+        <h2 id="timeline-title">Monthly timeline</h2>
+        <label>Inspect month<select id="inspect"></select></label>
+      </div>
+      <p class="muted">Pick a month or click a chart to align all three readings. Gaps indicate unavailable observations.</p>
+      <div id="comparison-tracks"></div>
+      <div class="chart-footer comparison-export">
+        <p class="muted">Includes actual policy-rate observation dates and source links.</p>
+        <button type="button" id="export-comparison">Download CSV</button>
+      </div>
+      <details>
+        <summary>Show observation table</summary>
+        <div class="scroll-table" tabindex="0" aria-label="Comparison observation table">
+          <table>
+            <thead><tr><th scope="col">Month</th><th scope="col">Consumer filings</th><th scope="col">Price (CAD)</th><th scope="col">Policy rate (%)</th><th scope="col">Rate observation date</th></tr></thead>
+            <tbody id="comparison-body"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+    <section class="panel sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Sources and definitions</h2>
+      <ul>
+        <li><a href="./">Insolvency Atlas</a> shows monthly consumer bankruptcies and proposals from the <a id="filings-workbook" href="https://open.canada.ca/data/en/dataset/746709f1-c729-44a1-ba84-7be5eadd3664">Office of the Superintendent of Bankruptcy workbook</a>.</li>
+        <li><a id="retail-atlas" href="../priceatlas/">Price Atlas</a> uses the reported monthly average price for the selected product and package in <a id="retail-source" href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810024501">Statistics Canada table 18-10-0245-01</a>.</li>
+        <li><a id="rate-lab" href="../bankrates/">BankRate Lab</a> uses <a href="https://www.bankofcanada.ca/valet/observations/V39079/json">Bank of Canada Valet series V39079</a>. This comparison uses the last reported business-day observation in each completed month.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="wrap"><a href="./">Back to Insolvency Atlas</a></footer>
+</body>
+</html>

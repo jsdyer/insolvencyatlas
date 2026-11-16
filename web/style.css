@@ -60,12 +60,33 @@ thead th { position: sticky; top: 0; background: #263630; font-size: .88rem; }
 .source-links { display: flex; gap: .6rem 1.5rem; overflow-wrap: anywhere; padding-left: 1.25rem; flex-wrap: wrap; }
 .source-links li a + a { margin-left: .5rem; }
 footer { padding-bottom: 2rem; font-size: .84rem; }
+.comparison-link { display: inline-flex; width: fit-content; align-items: center; gap: .6rem; padding: .65rem .85rem; border: 1px solid var(--edge); border-radius: .45rem; margin: .2rem 0; }
+.comparison-link:hover { background: var(--panel); }
+.comparison-controls form { grid-template-columns: 1fr 1.5fr repeat(2, minmax(9rem, .7fr)); }
+.comparison input[type=month] { width: 100%; min-width: 0; min-height: 2.5rem; padding: .42rem .5rem; background: #121b19; border: 1px solid var(--edge); border-radius: .43rem; color: var(--ink); font: inherit; }
+.comparison-controls p { margin: .8rem 0 0; }
+.comparison .validation { color: #ffcea4; }
+.comparison #compare-retry { margin: -.65rem 0 1.2rem; }
+.comparison-track { padding: .8rem .9rem .55rem; margin: 1rem 0; background: #121b19; border: 1px solid var(--edge); border-radius: .6rem; }
+.track-header { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; }
+.track-header p { margin: .24rem 0 0; }
+.track-reading { text-align: right; margin-left: auto; }
+.track-reading strong { color: var(--track-color); font: 600 1.23rem "IBM Plex Mono", ui-monospace, monospace; }
+.comparison-track h3 { font-size: 1.06rem; }
+.comparison-track canvas { height: 9.3rem; background: transparent; cursor: crosshair; }
+.comparison-export { margin-top: .9rem; }
+.comparison .sources li { line-height: 1.6; margin: .35rem 0; }
 @media (max-width: 44rem) {
   main { padding-top: 1.8rem; }
   form { grid-template-columns: 1fr 1fr; }
   form label:first-child { grid-column: 1 / -1; }
   canvas { height: 15rem; }
+  .comparison-controls form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .comparison-controls form label:first-child { grid-column: auto; }
 }
 @media (max-width: 24rem) {
   form { grid-template-columns: 1fr; }
+  .comparison-controls form { grid-template-columns: 1fr; }
+  .track-reading { margin-left: 0; text-align: left; }
+  .comparison-track { padding-inline: .6rem; }
 }

@@ -2,6 +2,10 @@
 
 Compare Canadian insolvency filings and official annual rates in a static web app. The timeline, observation table and CSV all reflect the selected range, measure and comparison areas. The URL preserves the comparison.
 
+The [cross-tool comparison](https://coolcode.ca/insolvencyatlas/compare.html) puts monthly consumer insolvencies, a selected grocery product and the Bank of Canada target overnight rate on the same calendar. The cards keep separate scales, report their geographic scopes and synchronize the inspected month. Policy rates use the last available business-day observation in each completed month. The chart and CSV preserve missing observations and actual policy-rate dates.
+
+The comparison reads the published same-origin Price Atlas and BankRate Lab snapshots alongside Insolvency Atlas. From a local server, mount the other two projects at `/priceatlas/` and `/bankrates/` to try all three series.
+
 - Monthly filings can be compared for Canada, provinces and territories, starting in January 1987. Compare all filings or the consumer, business or corporate series. The corporate series is part of the business series.
 - Calendar-year filing counts sum twelve observed months. Incomplete years and missing observations appear as gaps.
 - Official annual rates cover provinces, economic regions, census metropolitan areas and business sectors. Consumer rates use residents aged 18 and older. Business rates use the number of businesses. Both are expressed per 1,000 of the applicable denominator.
