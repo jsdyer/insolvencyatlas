@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the static Insolvency Atlas from two OSB workbooks."""
 import argparse
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 import json
 from math import isfinite
 from pathlib import Path
@@ -81,7 +81,7 @@ def workbook(kind, directory, local):
         for url in urls:
             try:
                 target.write_bytes(read_url(url, 10_000_000, 35))
-                return target, source(dataset, url)
+                return target, {**source(dataset, url), "retrieved_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
             except (OSError, ValueError) as error:
                 print(f"{kind}: {url}: {error}")
         raise RuntimeError(f"Could not download {kind} workbook")
@@ -212,6 +212,14 @@ def main():
         rmtree(stage)
     copytree(ROOT / "web", stage)
     (stage / "snapshot.json").write_text(json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    status = {
+        "sources": snapshot["sources"],
+        "filings_through": counts["periods"][-1],
+        "rates_through": rates["consumer-regions"]["periods"][-1],
+    }
+    if all("retrieved_at" in item for item in snapshot["sources"].values()):
+        status["oldest_retrieval"] = min(item["retrieved_at"] for item in snapshot["sources"].values())
+    (stage / "data-status.json").write_text(json.dumps(status) + "\n", encoding="utf-8")
     if output.exists():
         rmtree(output)
     stage.replace(output)

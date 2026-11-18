@@ -256,7 +256,9 @@ async function start() {
   const lastYear = snapshot.rates['consumer-regions'].periods.at(-1);
   $('coverage').textContent = `Monthly filings through ${periodLabel(lastMonth)} · Annual rates through ${lastYear}`;
   for (const [kind, selector] of [['counts', 'count-file'], ['rates', 'rate-file']]) {
-    $(selector).href = snapshot.sources[kind].file;
+    const source = snapshot.sources[kind];
+    $(selector).href = source.file;
+    if (source.retrieved_at) $(selector).textContent = `Workbook retrieved ${source.retrieved_at.slice(0, 10)} ↗`;
     $(selector).hidden = false;
   }
   loadDefaults();
