@@ -1,5 +1,9 @@
 # Insolvency Atlas
 
+<!-- coolcode:guide -->
+Compare filings or official annual rates for selected regions, then export the same range as CSV. Incomplete years stay blank, and consumer and business rates use different denominators, so compare like measures.
+<!-- /coolcode:guide -->
+
 Compare Canadian insolvency filings and official annual rates in a static web app. The timeline, observation table and CSV all reflect the selected range, measure and comparison areas. The URL preserves the comparison.
 
 The [cross-tool comparison](https://coolcode.ca/insolvencyatlas/compare.html) puts monthly consumer insolvencies, a selected grocery product and the Bank of Canada target overnight rate on the same calendar. The cards keep separate scales, report their geographic scopes and synchronize the inspected month. Policy rates use the last available business-day observation in each completed month. The chart and CSV preserve missing observations and actual policy-rate dates.

@@ -1,0 +1,27 @@
+{
+  "id": "insolvencyatlas",
+  "title": "Insolvency Atlas",
+  "description": "Explore insolvency counts and rates, or compare filings with grocery prices and policy rates.",
+  "category": "money",
+  "tags": [
+    "osb",
+    "consumer",
+    "business",
+    "insolvency",
+    "bankruptcy",
+    "proposal",
+    "debt",
+    "filings",
+    "industries"
+  ],
+  "icon": "chart-no-axes-column-decreasing",
+  "url": "/insolvencyatlas/",
+  "source": "https://github.com/jsdyer/insolvencyatlas",
+  "hosting": "project",
+  "access": "browser",
+  "data_info": {
+    "mode": "snapshot",
+    "detail": "The Office of the Superintendent of Bankruptcy publishes monthly filing counts and annual insolvency rates.",
+    "cadence": "Weekly"
+  }
+}
